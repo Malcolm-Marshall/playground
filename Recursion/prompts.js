@@ -20,12 +20,28 @@ var factorial = function(n) {
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+  return array.length === 0 ? 0 : array[0] + sum(array.slice(1));
 };
+
+//console.log(sum([1,2,3,4,5,6])); // 21
+
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
-var arraySum = function(array) {
+var arraySum = function(array) { /////////////////////////////////
+  let sum = 0;
+  const recurse = (arr) => {
+    for (let i = 0; i < arr.length; i++) {
+      if (Array.isArray(arr[i])) {
+        recurse(arr[i])
+      }
+      sum += arr[i]
+    }
+  }
+  return sum;
 };
+
+console.log(arraySum([1,[2,3],[[4]],5])); // 15
 
 // 4. Check if a number is even.
 var isEven = function(n) {
@@ -35,7 +51,11 @@ var isEven = function(n) {
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+  return n === 0 ? 0 : (n - 1 + sumBelow(n - 1));
 };
+
+// console.log(sumBelow(10)); // 45
+// console.log(sumBelow(7)); // 21
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
